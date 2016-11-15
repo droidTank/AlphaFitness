@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/inbox"
+            android:checked="false"
+           android:icon="@drawable/recordworkout"
+            android:title="@string/record_workout" />
+
+        <item
+            android:id="@+id/log_off"
+            android:checked="false"
+            android:icon="@drawable/logout"
+            android:title="@string/Sign_out_string" />
+    </group>
+</menu>

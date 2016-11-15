@@ -1,0 +1,389 @@
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:fitsSystemWindows="true">
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
+
+
+    <!-- Layout for content is here. This can be a RelativeLayout  -->
+
+
+
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_weight="0.7"
+        android:layout_height="180dp"
+        android:background="@drawable/backgroundheader">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="0.4">
+
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                app:srcCompat="@drawable/profpic"
+                android:id="@+id/prof_picture"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="5dp"
+                android:layout_gravity="center_vertical" />
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="15dp"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:text="Swapnil Patil"
+                    android:id="@+id/prof_username"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_large" />
+
+                <TextView
+                    android:text="Male"
+                    android:id="@+id/prof_gender"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="0.6">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_gravity="bottom"
+                android:layout_marginBottom="15dp"
+                android:paddingLeft="20dp">
+
+                <TextView
+                    android:text="Weight"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/text_weight"
+                    android:layout_gravity="center_horizontal"
+                    android:textAlignment="viewStart"
+                    android:textColor="@color/white"
+                    android:textSize="25dp" />
+
+                <TextView
+                    android:text="170 lbs"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/prof_weight"
+                    android:textColor="@color/white"
+                    android:textAlignment="viewStart"
+                    android:paddingLeft="17dp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_gravity="bottom"
+                android:layout_marginBottom="15dp"
+                android:paddingRight="20dp">
+
+                <TextView
+                    android:text="Height"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/text_height"
+                    android:textAlignment="textEnd"
+                    android:textColor="@color/white"
+                    android:textSize="25dp" />
+
+                <TextView
+                    android:text="6.1 ft"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/prof_height"
+                    android:textColor="@color/white"
+                    android:paddingRight="17dp"
+                    android:textAlignment="textEnd" />
+
+            </LinearLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="0.3"
+        android:layout_margin="10dp">
+
+
+        <TextView
+            android:text="Average/Weekly"
+            android:layout_width="match_parent"
+            android:id="@+id/textView"
+            android:gravity="center_vertical"
+            android:padding="10dp"
+            android:textSize="18sp"
+            android:background="@color/colorAccent"
+            android:layout_height="45dp"
+            android:textColor="@color/white" />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/boundary">
+
+            <TextView
+                android:text="Distance"
+                android:layout_width="match_parent"
+                android:id="@+id/text_distance"
+                android:gravity="center_vertical"
+                android:layout_height="40dp"
+                android:padding="10dp"
+                android:textSize="18sp"
+                android:layout_weight="1" />
+            <TextView
+                android:text="2.4 KM"
+                android:layout_width="match_parent"
+                android:id="@+id/distanceweek"
+                android:gravity="center_vertical"
+                android:layout_height="40dp"
+                android:padding="10dp"
+                android:textSize="18sp"
+                android:layout_weight="1"
+                android:textAlignment="textEnd" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/boundary">
+
+            <TextView
+                android:text="Time"
+                android:layout_width="match_parent"
+                android:id="@+id/text_time"
+                android:gravity="center_vertical"
+                android:layout_height="40dp"
+                android:padding="10dp"
+                android:textSize="18sp"
+                android:layout_weight="1" />
+            <TextView
+                android:text="1 hr 30 min 15 sec"
+                android:layout_width="match_parent"
+                android:id="@+id/timeweek"
+                android:gravity="center_vertical"
+                android:layout_height="40dp"
+                android:padding="10dp"
+                android:textSize="18sp"
+                android:layout_weight="1"
+                android:textAlignment="textEnd" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/boundary">
+
+            <TextView
+                android:text="WorkOuts"
+                android:layout_width="match_parent"
+                android:id="@+id/text_workouts"
+                android:gravity="center_vertical"
+                android:layout_height="40dp"
+                android:padding="10dp"
+                android:textSize="18sp"
+                android:layout_weight="1" />
+            <TextView
+                android:text="2 Times"
+                android:layout_width="match_parent"
+                android:id="@+id/workoutweek"
+                android:gravity="center_vertical"
+                android:layout_height="40dp"
+                android:padding="10dp"
+                android:textSize="18sp"
+                android:layout_weight="1"
+                android:textAlignment="textEnd" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/boundary">
+
+            <TextView
+                android:text="Calories Burned"
+                android:layout_width="match_parent"
+                android:id="@+id/text_calories"
+                android:gravity="center_vertical"
+                android:layout_height="40dp"
+                android:padding="10dp"
+                android:textSize="18sp"
+                android:layout_weight="1" />
+            <TextView
+                android:text="100 Cal"
+                android:layout_width="match_parent"
+                android:id="@+id/caloriesweek"
+                android:gravity="center_vertical"
+                android:layout_height="40dp"
+                android:padding="10dp"
+                android:textSize="18sp"
+                android:layout_weight="1"
+                android:textAlignment="textEnd" />
+        </LinearLayout>
+
+
+
+        <TextView
+            android:text="All Time"
+            android:layout_width="match_parent"
+            android:id="@+id/alltime"
+            android:gravity="center_vertical"
+            android:padding="10dp"
+            android:background="@color/colorAccent"
+            android:layout_height="45dp"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/boundary">
+
+            <TextView
+                android:text="Distance"
+                android:layout_width="match_parent"
+                android:id="@+id/text_distance_all"
+                android:gravity="center_vertical"
+                android:layout_height="40dp"
+                android:padding="10dp"
+                android:textSize="18sp"
+                android:layout_weight="1" />
+            <TextView
+                android:text="2.4 KM"
+                android:layout_width="match_parent"
+                android:id="@+id/distanceall"
+                android:gravity="center_vertical"
+                android:layout_height="40dp"
+                android:padding="10dp"
+                android:textSize="18sp"
+                android:layout_weight="1"
+                android:textAlignment="textEnd" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/boundary">
+
+            <TextView
+                android:text="Time"
+                android:layout_width="match_parent"
+                android:id="@+id/text_time_all"
+                android:gravity="center_vertical"
+                android:layout_height="40dp"
+                android:padding="10dp"
+                android:textSize="18sp"
+                android:layout_weight="1" />
+            <TextView
+                android:text="1 hr 30 min 15 sec"
+                android:layout_width="match_parent"
+                android:id="@+id/timeall"
+                android:gravity="center_vertical"
+                android:layout_height="40dp"
+                android:padding="10dp"
+                android:textSize="18sp"
+                android:layout_weight="1"
+                android:textAlignment="textEnd" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/boundary">
+
+            <TextView
+                android:text="WorkOuts"
+                android:layout_width="match_parent"
+                android:id="@+id/text_workouts_all"
+                android:gravity="center_vertical"
+                android:layout_height="40dp"
+                android:padding="10dp"
+                android:textSize="18sp"
+                android:layout_weight="1" />
+            <TextView
+                android:text="2 Times"
+                android:layout_width="match_parent"
+                android:id="@+id/workoutall"
+                android:gravity="center_vertical"
+                android:layout_height="40dp"
+                android:padding="10dp"
+                android:textSize="18sp"
+                android:layout_weight="1"
+                android:textAlignment="textEnd" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/boundary">
+
+            <TextView
+                android:text="Calories Burned"
+                android:layout_width="match_parent"
+                android:id="@+id/text_calories_all"
+                android:gravity="center_vertical"
+                android:layout_height="40dp"
+                android:padding="10dp"
+                android:textSize="18sp"
+                android:layout_weight="1" />
+            <TextView
+                android:text="100 Cal"
+                android:layout_width="match_parent"
+                android:id="@+id/caloriesall"
+                android:gravity="center_vertical"
+                android:layout_height="40dp"
+                android:padding="10dp"
+                android:textSize="18sp"
+                android:layout_weight="1"
+                android:textAlignment="textEnd" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+
+
+</LinearLayout>
+
+    </ScrollView>

@@ -1,0 +1,14 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="text_large">30dp</dimen>
+    <dimen name="prof_name_top_alignment">145dp</dimen>
+    <dimen name="prof_pic_top_alignment">50dp</dimen>
+    <dimen name="prof_name_top_alignment_details_page">105dp</dimen>
+    <dimen name="prof_pic_top_alignment_details_page">10dp</dimen>
+    <dimen name="prof_pic_height_width">90dp</dimen>
+    <dimen name="user_detail_text_view_height">40dp</dimen>
+    <dimen name="user_detail_text_view_padding_top">9dp</dimen>
+
+</resources>
