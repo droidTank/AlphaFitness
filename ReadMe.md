@@ -19,7 +19,7 @@ swapnilpatil427@gmail.com**
 
 
 
-![Screenshot](https://en.wikipedia.org/wiki/File:Path_example.JPG) 
+![Screenshot](https://github.com/swapnilpatil427/AlphaFitness/blob/master/screenshots/Screenshot.png) 
 ![Screenshot](https://en.wikipedia.org/wiki/File:Path_example.JPG)  
 ![Screenshot](https://en.wikipedia.org/wiki/File:Path_example.JPG)
 ![Screenshot](https://en.wikipedia.org/wiki/File:Path_example.JPG)
