@@ -20,9 +20,11 @@ swapnilpatil427@gmail.com**
 
 
 ![Screenshot](https://github.com/swapnilpatil427/AlphaFitness/blob/master/screenshots/Screenshot.png) 
-![Screenshot](https://en.wikipedia.org/wiki/File:Path_example.JPG)  
-![Screenshot](https://en.wikipedia.org/wiki/File:Path_example.JPG)
-![Screenshot](https://en.wikipedia.org/wiki/File:Path_example.JPG)
+![Screenshot](https://github.com/swapnilpatil427/AlphaFitness/blob/master/screenshots/Screenshot1.png)  
+![Screenshot](https://github.com/swapnilpatil427/AlphaFitness/blob/master/screenshots/Screenshot2.png)
+![Screenshot](https://github.com/swapnilpatil427/AlphaFitness/blob/master/screenshots/Screenshot3.png)
+![picture alt](https://github.com/swapnilpatil427/AlphaFitness/blob/master/screenshots/Screenshot4.png)
+![picture alt](https://github.com/swapnilpatil427/AlphaFitness/blob/master/screenshots/Screenshot5.png)
 
 # A) Designing User Interface
 The Alpha Fitness app (Figure 1) has several Activities. The first Activity that will be
