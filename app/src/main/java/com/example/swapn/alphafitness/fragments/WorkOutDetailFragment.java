@@ -18,7 +18,9 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.swapn.alphafitness.R;
+import com.example.swapn.alphafitness.RecordWorkOutActivity;
 import com.example.swapn.alphafitness.common.Util;
+import com.example.swapn.alphafitness.models.UserModel;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
@@ -59,6 +61,7 @@ public class WorkOutDetailFragment extends Fragment {
     private double maxSpeed = 0;
     private double minSpeed = 0;
     private double avgSpeed = 0;
+    UserModel userData;
 
     private OnFragmentInteractionListener mListener;
 
@@ -140,16 +143,18 @@ public class WorkOutDetailFragment extends Fragment {
                 max_speed.setText(Double.toString(maxSpeed));
             }
 
-            if(speed <= minSpeed) {
+            if(speed <= minSpeed || minSpeed == 0) {
                 minSpeed = speed;
                 min_speed.setText(Double.toString(minSpeed));
             }
-
+            if(avgSpeed == 0) {
+                avgSpeed = speed;
+            }
             double totalspeed = avgSpeed * currentTime;
             avgSpeed = totalspeed / (currentTime + duration);
-            avg_speed.setText(Double.toString(avgSpeed));
+            avg_speed.setText(Util.returnTruncDouble(avgSpeed));
 
-            //linechart.a
+            //linechart
             lineChart.notifyDataSetChanged();
             previousCounter = count;
             lineChart.invalidate();
@@ -182,6 +187,7 @@ public class WorkOutDetailFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        userData = ((RecordWorkOutActivity) getActivity()).getUserData();
         max_speed = (TextView) view.findViewById(R.id.max_speed);
         min_speed = (TextView) view.findViewById(R.id.min_speed);
         avg_speed = (TextView) view.findViewById(R.id.avg_speed);
@@ -203,12 +209,7 @@ public class WorkOutDetailFragment extends Fragment {
         }
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
-    }
+
 
     @Override
     public void onAttach(Context context) {
@@ -239,6 +240,6 @@ public class WorkOutDetailFragment extends Fragment {
      */
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
+        UserModel getUserData();
     }
 }

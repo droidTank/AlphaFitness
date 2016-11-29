@@ -37,14 +37,16 @@
                 android:id="@+id/prof_picture"
                 android:layout_marginLeft="15dp"
                 android:layout_marginTop="5dp"
-                android:layout_gravity="center_vertical" />
+                android:layout_gravity="center_vertical"
+                android:layout_weight="2" />
 
             <LinearLayout
                 android:orientation="vertical"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="15dp"
-                android:gravity="center_vertical">
+                android:gravity="center_vertical"
+                android:layout_weight="4">
 
                 <TextView
                     android:text="Swapnil Patil"
@@ -61,6 +63,15 @@
                     android:layout_height="wrap_content"
                     android:textColor="@color/white" />
             </LinearLayout>
+
+            <ImageButton
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                app:srcCompat="@android:drawable/ic_menu_edit"
+                android:id="@+id/update_button"
+                android:background="@android:color/transparent"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1" />
         </LinearLayout>
 
         <LinearLayout
@@ -136,7 +147,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="0.3"
-        android:layout_margin="10dp">
+        android:layout_margin="10dp"
+        android:elevation="5dp"
+        android:background="@color/white">
 
 
         <TextView
@@ -164,7 +177,8 @@
                 android:layout_height="40dp"
                 android:padding="10dp"
                 android:textSize="18sp"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                android:textColor="@color/aluminum" />
             <TextView
                 android:text="2.4 KM"
                 android:layout_width="match_parent"
@@ -174,6 +188,7 @@
                 android:padding="10dp"
                 android:textSize="18sp"
                 android:layout_weight="1"
+                android:textColor="@color/aluminum"
                 android:textAlignment="textEnd" />
         </LinearLayout>
 
@@ -191,6 +206,7 @@
                 android:layout_height="40dp"
                 android:padding="10dp"
                 android:textSize="18sp"
+                android:textColor="@color/aluminum"
                 android:layout_weight="1" />
             <TextView
                 android:text="1 hr 30 min 15 sec"
@@ -201,6 +217,7 @@
                 android:padding="10dp"
                 android:textSize="18sp"
                 android:layout_weight="1"
+                android:textColor="@color/aluminum"
                 android:textAlignment="textEnd" />
         </LinearLayout>
 
@@ -218,6 +235,7 @@
                 android:layout_height="40dp"
                 android:padding="10dp"
                 android:textSize="18sp"
+                android:textColor="@color/aluminum"
                 android:layout_weight="1" />
             <TextView
                 android:text="2 Times"
@@ -227,6 +245,7 @@
                 android:layout_height="40dp"
                 android:padding="10dp"
                 android:textSize="18sp"
+                android:textColor="@color/aluminum"
                 android:layout_weight="1"
                 android:textAlignment="textEnd" />
         </LinearLayout>
@@ -244,6 +263,7 @@
                 android:gravity="center_vertical"
                 android:layout_height="40dp"
                 android:padding="10dp"
+                android:textColor="@color/aluminum"
                 android:textSize="18sp"
                 android:layout_weight="1" />
             <TextView
@@ -254,6 +274,7 @@
                 android:layout_height="40dp"
                 android:padding="10dp"
                 android:textSize="18sp"
+                android:textColor="@color/aluminum"
                 android:layout_weight="1"
                 android:textAlignment="textEnd" />
         </LinearLayout>
@@ -284,6 +305,7 @@
                 android:gravity="center_vertical"
                 android:layout_height="40dp"
                 android:padding="10dp"
+                android:textColor="@color/aluminum"
                 android:textSize="18sp"
                 android:layout_weight="1" />
             <TextView
@@ -294,6 +316,7 @@
                 android:layout_height="40dp"
                 android:padding="10dp"
                 android:textSize="18sp"
+                android:textColor="@color/aluminum"
                 android:layout_weight="1"
                 android:textAlignment="textEnd" />
         </LinearLayout>
@@ -311,6 +334,7 @@
                 android:gravity="center_vertical"
                 android:layout_height="40dp"
                 android:padding="10dp"
+                android:textColor="@color/aluminum"
                 android:textSize="18sp"
                 android:layout_weight="1" />
             <TextView
@@ -321,6 +345,7 @@
                 android:layout_height="40dp"
                 android:padding="10dp"
                 android:textSize="18sp"
+                android:textColor="@color/aluminum"
                 android:layout_weight="1"
                 android:textAlignment="textEnd" />
         </LinearLayout>
@@ -339,6 +364,7 @@
                 android:layout_height="40dp"
                 android:padding="10dp"
                 android:textSize="18sp"
+                android:textColor="@color/aluminum"
                 android:layout_weight="1" />
             <TextView
                 android:text="2 Times"
@@ -348,6 +374,7 @@
                 android:layout_height="40dp"
                 android:padding="10dp"
                 android:textSize="18sp"
+                android:textColor="@color/aluminum"
                 android:layout_weight="1"
                 android:textAlignment="textEnd" />
         </LinearLayout>
@@ -366,6 +393,7 @@
                 android:layout_height="40dp"
                 android:padding="10dp"
                 android:textSize="18sp"
+                android:textColor="@color/aluminum"
                 android:layout_weight="1" />
             <TextView
                 android:text="100 Cal"
@@ -375,6 +403,7 @@
                 android:layout_height="40dp"
                 android:padding="10dp"
                 android:textSize="18sp"
+                android:textColor="@color/aluminum"
                 android:layout_weight="1"
                 android:textAlignment="textEnd" />
         </LinearLayout>

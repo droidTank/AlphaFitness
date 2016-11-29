@@ -27,6 +27,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -102,7 +103,6 @@ public class RecordWorkFragment extends Fragment implements OnMapReadyCallback,
     private TextView distance;
     private TextView time;
     private MyDbHelper db;
-
 
     long starttime = 0L;
     long timeInMilliseconds = 0L;
@@ -249,6 +249,8 @@ public class RecordWorkFragment extends Fragment implements OnMapReadyCallback,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_record_work, container, false);
+
+       // ((RecordWorkOutActivity) getActivity()).initialiseApp();
         //Util.setRunning(false);
         return view;
     }
@@ -512,16 +514,20 @@ public class RecordWorkFragment extends Fragment implements OnMapReadyCallback,
         mLocationRequest.setInterval(10000);
         mLocationRequest.setFastestInterval(10000);
         mLocationRequest.setPriority(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY);
-        if (ContextCompat.checkSelfPermission(getActivity(),
-                Manifest.permission.ACCESS_FINE_LOCATION)
-                == PackageManager.PERMISSION_GRANTED) {
-            LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, this);
-            Location location = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
-            if (location == null) {
+        try {
+            if (ContextCompat.checkSelfPermission(getActivity(),
+                    Manifest.permission.ACCESS_FINE_LOCATION)
+                    == PackageManager.PERMISSION_GRANTED) {
                 LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, this);
-            } else {
-                handleNewLocation(location);
+                Location location = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
+                if (location == null) {
+                    LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, this);
+                } else {
+                    handleNewLocation(location);
+                }
             }
+        } catch (Exception e) {
+
         }
     }
 

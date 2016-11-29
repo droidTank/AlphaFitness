@@ -25,11 +25,12 @@ import static android.content.Context.MODE_PRIVATE;
 
 public class Util {
     private static double step_to_distance = 0.000466028; // Considering 75 cm per second, converting second to miles
-    private static int step_to_time = 2;
-    private float step_to_calory;
+   // private static int step_to_time = 2;
+    //private float step_to_calory;
     private static DecimalFormat df = new DecimalFormat("#.0000");
     public static final String MyPREFERENCES = "MyPrefs" ;
     public static Context context;
+    private static int step_to_calory = 38; // Per 1000 steps
 
     public static void setContext(Context cont) {
         context = cont;
@@ -70,7 +71,15 @@ public class Util {
         return df.format(counter * step_to_distance);
     }
 
-    public static String timeConversion(int counter) {
+    public static String returnTruncDouble (Double value) {
+        return df.format(value);
+    }
+
+    public static String getCaloriesBurnt (int steps) {
+        return df.format(step_to_calory * (((double) steps)/1000));
+    }
+
+  /*  public static String timeConversion(int counter) {
         int totalSeconds = counter * step_to_time;
         final int MINUTES_IN_AN_HOUR = 60;
         final int SECONDS_IN_A_MINUTE = 60;
@@ -81,7 +90,7 @@ public class Util {
         int hours = totalMinutes / MINUTES_IN_AN_HOUR;
 
         return hours + ":" + minutes + ":" + seconds;
-    }
+    } */
 
     public void setSharedPreferences (Context context, UserModel user) {
         SharedPreferences mPrefs = context.getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
@@ -105,6 +114,7 @@ public class Util {
         String[] time = date.split(" ");
         return time[0]  + " " + setime;
     }
+
 
     public String getStringDate(Date date) {
             DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss:SSS");

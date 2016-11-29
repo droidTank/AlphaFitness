@@ -1,7 +1,10 @@
 package com.example.swapn.alphafitness.fragments;
 
 import android.app.ProgressDialog;
+import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -11,6 +14,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -41,6 +46,10 @@ public class ProfileDetailsFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    public static final String mBroadcastStringAction = "com.truiton.broadcast.string";
+
+    private IntentFilter mIntentFilter;
+
     private UserModel user;
     private MyDbHelper db;
     private Util u;
@@ -50,6 +59,7 @@ public class ProfileDetailsFragment extends Fragment {
     private TextView gender;
     private TextView weight;
     private TextView height;
+    private ImageButton update;
 
     private TextView distance_week;
     private TextView time_week;
@@ -60,6 +70,9 @@ public class ProfileDetailsFragment extends Fragment {
     private TextView time_all;
     private TextView workouts_all;
     private TextView calories_all;
+
+    private int step_week = 0;
+    private int step_all = 0;
 
 
 
@@ -127,6 +140,14 @@ public class ProfileDetailsFragment extends Fragment {
         workouts_all = (TextView) view.findViewById(R.id.workoutall);
         calories_all = (TextView) view.findViewById(R.id.caloriesall);
 
+        update = (ImageButton) view.findViewById(R.id.update_button);
+        update.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((RecordWorkOutActivity) getActivity()).openEditProfileFragment();
+            }
+        });
+
         user = ((RecordWorkOutActivity) getActivity()).getUserData();
 
 
@@ -135,6 +156,11 @@ public class ProfileDetailsFragment extends Fragment {
 
         AllWorkoutsAsyncTaskRunner allworkoutrunner = new AllWorkoutsAsyncTaskRunner();
         allworkoutrunner.execute();
+
+        mIntentFilter = new IntentFilter();
+        mIntentFilter.addAction(mBroadcastStringAction);
+        getActivity().registerReceiver(mReceiver, mIntentFilter);
+
      /*   Toolbar toolbar = (Toolbar) getActivity().findViewById(R.id.toolbar);
         toolbar.setNavigationIcon(R.drawable.ic_arrow_back_white_24dp);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -164,6 +190,7 @@ public class ProfileDetailsFragment extends Fragment {
 
                 array = db.getAllWorkout(user.getName());
                 int stepCount = Util.getStepCountFromWorkout(array);
+                step_all = stepCount;
                 String workout_count = Integer.toString(array.size());
                 String time = "";
                 try {
@@ -174,7 +201,8 @@ public class ProfileDetailsFragment extends Fragment {
                 }
                 //String time = Util.timeConversion(stepCount);
                 String distance = Util.returnDistance(stepCount);
-                return distance + "#" + time + "#" + workout_count;
+                String calories = Util.getCaloriesBurnt(stepCount);
+                return distance + "#" + time + "#" + workout_count + "#" + calories;
             } catch (Exception e) {
                 e.printStackTrace();
                 return "";
@@ -199,11 +227,12 @@ public class ProfileDetailsFragment extends Fragment {
 
                 time_all.setText(workout_data[1]);
                 workouts_all.setText(workout_data[2] + " times");
+                calories_all.setText(workout_data[3] + " Cal");
             } else {
                 distance_all.setText("0 miles");
                 time_all.setText("00 hrs 00 min 00 sec");
                 workouts_all.setText("0 times");
-            //    calories_all.setText("0 Cal");
+                calories_all.setText("0 Cal");
             }
         }
 
@@ -236,7 +265,7 @@ public class ProfileDetailsFragment extends Fragment {
             workouts_week.setText("calculating...");
             distance_week.setText("Calculating...");
             time_week.setText("Calculating...");
-            calories_week.setText("Calculating...");
+        //    calories_week.setText("Calculating...");
         }
 
 
@@ -245,6 +274,7 @@ public class ProfileDetailsFragment extends Fragment {
             // execution of result of Long time consuming operation
             if(workouts != null) {
                 int stepCount = Util.getStepCountFromWorkout(workouts);
+                step_week = stepCount;
                 distance_week.setText(Util.returnDistance(stepCount) + " miles");
                 try {
                     time_week.setText(Util.millisecToHours(calculateTotalTimeWorkouts(workouts)));
@@ -252,13 +282,14 @@ public class ProfileDetailsFragment extends Fragment {
                     Log.e("ParseTotalTime", "Error parsing total time of workouts");
                     time_week.setText("00 hrs 00 min 00 sec");
                 }
+                calories_week.setText(Util.getCaloriesBurnt(stepCount) + " Cal");
                 //time_week.setText(Util.timeConversion(stepCount));
                 workouts_week.setText(Integer.toString(workouts.size()) + " times");
             } else {
                 distance_week.setText("0 miles");
                 time_week.setText("00 hrs 00 min 00 sec");
                 workouts_week.setText("0 times");
-               // calories_all.setText("0 Cal");
+                calories_week.setText("0 Cal");
             }
         }
 
@@ -266,6 +297,8 @@ public class ProfileDetailsFragment extends Fragment {
         protected void onProgressUpdate(String... text) {
         }
     }
+
+
 
     public long calculateTotalTimeWorkouts(ArrayList<WorkoutTracking> workouts) throws ParseException {
         SimpleDateFormat outputFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -322,4 +355,32 @@ public class ProfileDetailsFragment extends Fragment {
         UserModel getUserData();
         //void homeClick();
     }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        try {
+            if (mReceiver != null)
+                getActivity().unregisterReceiver(mReceiver);
+        } catch (Exception e) {
+
+        }
+
+    }
+
+    private BroadcastReceiver mReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            if (intent.getAction().equals(RecordWorkFragment.mBroadcastStringAction)) {
+                int counter = intent.getIntExtra("count", 0);
+                step_all += 1;
+                step_week += 1;
+                distance_week.setText(Util.returnDistance(step_week) + " miles");
+                distance_all.setText(Util.returnDistance(step_all) + " miles");
+                calories_week.setText(Util.getCaloriesBurnt(step_week) + " Cal");
+                calories_all.setText(Util.getCaloriesBurnt(step_all) + " Cal");
+
+            }
+        }
+    };
 }

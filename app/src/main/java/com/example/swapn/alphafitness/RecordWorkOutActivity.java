@@ -22,6 +22,7 @@ import android.widget.Toast;
 import com.example.swapn.alphafitness.common.CircleTransform;
 import com.example.swapn.alphafitness.common.FirebaseDb;
 import com.example.swapn.alphafitness.common.Util;
+import com.example.swapn.alphafitness.fragments.EditProfileDetailsFragment;
 import com.example.swapn.alphafitness.fragments.ProfileDetailsFragment;
 import com.example.swapn.alphafitness.fragments.RecordWorkFragment;
 import com.example.swapn.alphafitness.fragments.WorkOutDetailFragment;
@@ -34,7 +35,7 @@ import com.squareup.picasso.Picasso;
 
 
 public class RecordWorkOutActivity extends AppCompatActivity implements RecordWorkFragment.OnFragmentInteractionListener,
-WorkOutDetailFragment.OnFragmentInteractionListener, ProfileDetailsFragment.OnFragmentInteractionListener{
+WorkOutDetailFragment.OnFragmentInteractionListener, ProfileDetailsFragment.OnFragmentInteractionListener, EditProfileDetailsFragment.OnFragmentInteractionListener{
     private static final String TAG = "RecordActivity";
     private Toolbar toolbar;
     private NavigationView navigationView;
@@ -56,7 +57,7 @@ WorkOutDetailFragment.OnFragmentInteractionListener, ProfileDetailsFragment.OnFr
         setSupportActionBar(toolbar);
         mAuth = FirebaseAuth.getInstance();
         databaseUser = FirebaseDatabase.getInstance().getReference(FirebaseDb.TABLE_USER);
-        initialiseApp();
+        userData = u.getUserFromSHaredPreference(getApplicationContext());
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
@@ -64,7 +65,7 @@ WorkOutDetailFragment.OnFragmentInteractionListener, ProfileDetailsFragment.OnFr
                 if (user != null) {
                     // TODO Setup user Account exists check
                     if(userData != null) {
-
+                        initialiseApp();
                     } else {
                         loginActivity();
                     }
@@ -110,7 +111,7 @@ WorkOutDetailFragment.OnFragmentInteractionListener, ProfileDetailsFragment.OnFr
         fragmentTransaction.commit();
     }
 
-    private void openProfileDetailFragment () {
+    public void openProfileDetailFragment () {
         drawerLayout.closeDrawers();
         ProfileDetailsFragment fragment = new ProfileDetailsFragment();
         android.support.v4.app.FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
@@ -126,10 +127,15 @@ WorkOutDetailFragment.OnFragmentInteractionListener, ProfileDetailsFragment.OnFr
         fragmentTransaction.commit();
     }
 
+    public void openEditProfileFragment () {
+        drawerLayout.closeDrawers();
+        EditProfileDetailsFragment fragment = new EditProfileDetailsFragment();
+        android.support.v4.app.FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.frame,fragment);
+        fragmentTransaction.commit();
+    }
+
     private void initialiseApp() {
-
-        userData = u.getUserFromSHaredPreference(getApplicationContext());
-
         if(userData != null) {
         //Initializing NavigationView
         navigationView = (NavigationView) findViewById(R.id.navigation_view);
@@ -253,12 +259,6 @@ WorkOutDetailFragment.OnFragmentInteractionListener, ProfileDetailsFragment.OnFr
         }
     }
 
-
-
-    @Override
-    public void onFragmentInteraction(Uri uri) {
-
-    }
 
     @Override
     public UserModel getUserData() {
