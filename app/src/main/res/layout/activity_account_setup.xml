@@ -22,31 +22,35 @@
             android:background="@drawable/backgroundhome" />
 
         <!-- Name Label -->
-        <android.support.design.widget.TextInputLayout
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp">
-            <EditText android:id="@+id/input_weight"
+
+            <EditText
+                android:id="@+id/input_weight"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textPhonetic"
                 android:hint="Weight in lbs (e.g 170)" />
-        </android.support.design.widget.TextInputLayout>
+        </com.google.android.material.textfield.TextInputLayout>
 
 
         <!--  Email Label -->
-        <android.support.design.widget.TextInputLayout
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp">
-            <EditText android:id="@+id/input_height"
+
+            <EditText
+                android:id="@+id/input_height"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textEmailAddress"
                 android:hint="Height in ft (e.g 5.11)" />
-        </android.support.design.widget.TextInputLayout>
+        </com.google.android.material.textfield.TextInputLayout>
 
 
 
@@ -69,7 +73,7 @@
                 android:onClick="onRadioButtonClicked"/>
         </RadioGroup>
 
-        <android.support.v7.widget.AppCompatButton
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_submit"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"

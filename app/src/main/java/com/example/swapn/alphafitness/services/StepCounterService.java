@@ -1,16 +1,12 @@
 package com.example.swapn.alphafitness.services;
 
 import android.Manifest;
-import android.app.Activity;
-import android.app.Notification;
 import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -23,10 +19,10 @@ import android.os.Handler;
 import android.os.IBinder;
 import android.os.RemoteException;
 import android.preference.PreferenceManager;
-import android.support.v4.app.ActivityCompat;
-import android.support.v7.app.NotificationCompat;
 import android.util.Log;
-import android.widget.Toast;
+
+import androidx.core.app.ActivityCompat;
+import androidx.core.app.NotificationCompat;
 
 import com.example.swapn.alphafitness.IStepCounterInterface;
 import com.example.swapn.alphafitness.R;
@@ -38,14 +34,9 @@ import com.example.swapn.alphafitness.database.Tables.WorkoutTracking;
 import com.example.swapn.alphafitness.fragments.RecordWorkFragment;
 import com.example.swapn.alphafitness.fragments.WorkOutDetailFragment;
 import com.example.swapn.alphafitness.models.UserModel;
-import com.facebook.appevents.internal.Constants;
-import com.github.mikephil.charting.data.Entry;
-import com.github.mikephil.charting.data.LineData;
-import com.github.mikephil.charting.data.LineDataSet;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -144,13 +135,23 @@ public class StepCounterService extends Service implements SensorEventListener {
 
         stepSensor = sensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER);
         if (stepSensor != null) {
-           sensorManager.registerListener(this, stepSensor, SensorManager.SENSOR_DELAY_UI);
+            sensorManager.registerListener(this, stepSensor, SensorManager.SENSOR_DELAY_UI);
         } else {
             Log.d("Sensor", "Step Sensor Not Found");
         }
 
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         listener = new MyLocationListener();
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return;
+        }
         locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, listener);
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, listener);
         if (ActivityCompat.checkSelfPermission(Util.getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
@@ -173,7 +174,7 @@ public class StepCounterService extends Service implements SensorEventListener {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         super.onStartCommand(intent, flags, startId);
-        counter = (Integer) intent.getIntExtra("Count", 0);
+        counter = intent.getIntExtra("Count", 0);
         loadNotification = new LoadNotification("AlphaFitness", "App is Running....");
         loadNotification.notifyMessage();
         return START_STICKY;
@@ -357,10 +358,7 @@ public class StepCounterService extends Service implements SensorEventListener {
             return true;
         } else if (isNewer && !isLessAccurate) {
             return true;
-        } else if (isNewer && !isSignificantlyLessAccurate && isFromSameProvider) {
-            return true;
-        }
-        return false;
+        } else return isNewer && !isSignificantlyLessAccurate && isFromSameProvider;
     }
 
     /** Checks whether two providers are the same */

@@ -1,15 +1,9 @@
 package com.example.swapn.alphafitness;
 
-import android.*;
 import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.net.Uri;
-import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -17,6 +11,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import com.example.swapn.alphafitness.common.FirebaseDb;
 import com.example.swapn.alphafitness.common.Util;
@@ -26,12 +25,8 @@ import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.Scopes;
 import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.common.api.Scope;
-import com.google.android.gms.plus.Plus;
-import com.google.android.gms.plus.model.people.Person;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
@@ -55,13 +50,13 @@ public class LoginActivity extends AppCompatActivity implements
     private EditText _emailText;
     private EditText _passwordText;
     private Button _loginButton;
-    private TextView _signupLink;
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
     DatabaseReference databaseUser;
     DatabaseReference databaseUserData;
     private GoogleApiClient mGoogleApiClient;
     Util u;
+
 
     public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
     public boolean checkLocationPermission(){
@@ -132,7 +127,7 @@ public class LoginActivity extends AppCompatActivity implements
                 // ...
             }
         };
-        SignInButton signInButton = (SignInButton) findViewById(R.id.sign_in_button);
+        SignInButton signInButton = findViewById(R.id.sign_in_button);
         signInButton.setSize(SignInButton.SIZE_STANDARD);
         signInButton.setScopes(gso.getScopeArray());
         signInButton.setOnClickListener(new View.OnClickListener() {
@@ -142,10 +137,10 @@ public class LoginActivity extends AppCompatActivity implements
             }
         });
 
-        _loginButton = (Button) findViewById(R.id.btn_login);
-        _emailText = (EditText) findViewById(R.id.input_email);
-        _passwordText = (EditText) findViewById(R.id.input_password);
-        _signupLink = (TextView) findViewById(R.id.link_signup);
+        _loginButton = findViewById(R.id.btn_login);
+        _emailText = findViewById(R.id.input_email);
+        _passwordText = findViewById(R.id.input_password);
+        TextView _signupLink = findViewById(R.id.link_signup);
 
         _loginButton.setOnClickListener(new View.OnClickListener() {
 
@@ -177,6 +172,9 @@ public class LoginActivity extends AppCompatActivity implements
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
+        //bypassing login activity for testing purpose
+
+
         // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
         if (requestCode == RC_SIGN_IN) {
             GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
@@ -185,18 +183,29 @@ public class LoginActivity extends AppCompatActivity implements
                 GoogleSignInAccount account = result.getSignInAccount();
                 //Person person  = Plus.PeopleApi.getCurrentPerson(mGoogleApiClient);
 
+                assert account != null;
                 String personName = account.getDisplayName();
-                String personFamilyName = account.getFamilyName();
+//                String personFamilyName = account.getFamilyName();
                 UserModel user = new UserModel();
                 user.setName(personName);
                 user.setEmail(account.getEmail());
-               // user.setProf_pic(account.getPhotoUrl());
+                // user.setProf_pic(account.getPhotoUrl());
                 firebaseAuthWithGoogle(account, user);
             } else {
                 // Google Sign In failed, update UI appropriately
                 // ...
             }
         }
+
+        //bypassing end
+        /*  failed bypassing data
+        GoogleSignInAccount account=new GoogleSignInAccount("geo","g@g.com","abc","def","ghi","jkl","mno",
+                000123,"pqr",null,"uvw","xyz");
+        UserModel user=new UserModel();
+        user.setName("Geo");
+        user.setEmail("g@g.com");
+        firebaseAuthWithGoogle(account,user);*/
+
     }
 
     private void firebaseAuthWithGoogle(GoogleSignInAccount acct, final UserModel user) {

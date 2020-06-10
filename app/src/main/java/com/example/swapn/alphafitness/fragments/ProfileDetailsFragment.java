@@ -1,6 +1,5 @@
 package com.example.swapn.alphafitness.fragments;
 
-import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -8,16 +7,15 @@ import android.content.IntentFilter;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.fragment.app.Fragment;
 
 import com.example.swapn.alphafitness.R;
 import com.example.swapn.alphafitness.RecordWorkOutActivity;
@@ -121,26 +119,26 @@ public class ProfileDetailsFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_profile_details, container, false);
         db = MyDbHelper.getInstance(getActivity().getApplicationContext());
         u = new Util();
-        prof_pic = (ImageView) view.findViewById(R.id.prof_picture);
-        username = (TextView) view.findViewById(R.id.prof_username);
-        gender = (TextView) view.findViewById(R.id.prof_gender);
-        weight = (TextView) view.findViewById(R.id.prof_weight);
-        height = (TextView) view.findViewById(R.id.prof_height);
+        prof_pic = view.findViewById(R.id.prof_picture);
+        username = view.findViewById(R.id.prof_username);
+        gender = view.findViewById(R.id.prof_gender);
+        weight = view.findViewById(R.id.prof_weight);
+        height = view.findViewById(R.id.prof_height);
         long a = new Date().getTime();
 
-       //int daily_count = db.ExistsDayTracking(u.editTime(u.getStringDate(new Date()), "00:00:00"));
+        //int daily_count = db.ExistsDayTracking(u.editTime(u.getStringDate(new Date()), "00:00:00"));
 
-        distance_week = (TextView) view.findViewById(R.id.distanceweek);
-        time_week = (TextView) view.findViewById(R.id.timeweek);
-        workouts_week = (TextView) view.findViewById(R.id.workoutweek);
-        calories_week = (TextView) view.findViewById(R.id.caloriesweek);
+        distance_week = view.findViewById(R.id.distanceweek);
+        time_week = view.findViewById(R.id.timeweek);
+        workouts_week = view.findViewById(R.id.workoutweek);
+        calories_week = view.findViewById(R.id.caloriesweek);
 
-        distance_all = (TextView) view.findViewById(R.id.distanceall);
-        time_all = (TextView) view.findViewById(R.id.timeall);
-        workouts_all = (TextView) view.findViewById(R.id.workoutall);
-        calories_all = (TextView) view.findViewById(R.id.caloriesall);
+        distance_all = view.findViewById(R.id.distanceall);
+        time_all = view.findViewById(R.id.timeall);
+        workouts_all = view.findViewById(R.id.workoutall);
+        calories_all = view.findViewById(R.id.caloriesall);
 
-        update = (ImageButton) view.findViewById(R.id.update_button);
+        update = view.findViewById(R.id.update_button);
         update.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -284,7 +282,7 @@ public class ProfileDetailsFragment extends Fragment {
                 }
                 calories_week.setText(Util.getCaloriesBurnt(stepCount) + " Cal");
                 //time_week.setText(Util.timeConversion(stepCount));
-                workouts_week.setText(Integer.toString(workouts.size()) + " times");
+                workouts_week.setText(workouts.size() + " times");
             } else {
                 distance_week.setText("0 miles");
                 time_week.setText("00 hrs 00 min 00 sec");

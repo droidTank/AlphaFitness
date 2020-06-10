@@ -4,18 +4,15 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.res.Configuration;
-import android.location.Location;
-import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 
 import com.example.swapn.alphafitness.R;
 import com.example.swapn.alphafitness.RecordWorkOutActivity;
@@ -28,8 +25,6 @@ import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.utils.ColorTemplate;
 
 import java.util.ArrayList;
-import java.util.Timer;
-import java.util.TimerTask;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -168,7 +163,7 @@ public class WorkOutDetailFragment extends Fragment {
         ArrayList<Entry> entries = new ArrayList<>();
         entries.add(new Entry(0f, 0));
 
-        LineDataSet dataset = new LineDataSet(entries, "Steps per " + Integer.toString(duration) +" minutes");
+        LineDataSet dataset = new LineDataSet(entries, "Steps per " + duration + " minutes");
         labels.add("0");
 
         LineData data = new LineData(labels, dataset);
@@ -188,11 +183,11 @@ public class WorkOutDetailFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         userData = ((RecordWorkOutActivity) getActivity()).getUserData();
-        max_speed = (TextView) view.findViewById(R.id.max_speed);
-        min_speed = (TextView) view.findViewById(R.id.min_speed);
-        avg_speed = (TextView) view.findViewById(R.id.avg_speed);
+        max_speed = view.findViewById(R.id.max_speed);
+        min_speed = view.findViewById(R.id.min_speed);
+        avg_speed = view.findViewById(R.id.avg_speed);
         currentTime = 0;
-        lineChart = (LineChart) view.findViewById(R.id.chart);
+        lineChart = view.findViewById(R.id.chart);
         createChart();
         mIntentFilter.addAction(mBroadcastCounterAction);
         getActivity().registerReceiver(mReceiver, mIntentFilter);

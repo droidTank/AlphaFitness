@@ -3,14 +3,7 @@ package com.example.swapn.alphafitness;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.net.Uri;
-import android.support.annotation.NonNull;
-import android.support.design.widget.NavigationView;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -18,6 +11,14 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.example.swapn.alphafitness.common.CircleTransform;
 import com.example.swapn.alphafitness.common.FirebaseDb;
@@ -27,6 +28,7 @@ import com.example.swapn.alphafitness.fragments.ProfileDetailsFragment;
 import com.example.swapn.alphafitness.fragments.RecordWorkFragment;
 import com.example.swapn.alphafitness.fragments.WorkOutDetailFragment;
 import com.example.swapn.alphafitness.models.UserModel;
+import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
@@ -53,7 +55,7 @@ WorkOutDetailFragment.OnFragmentInteractionListener, ProfileDetailsFragment.OnFr
         u = new Util();
         Util.setContext(getApplicationContext());
         // Initializing Toolbar and setting it as the actionbar
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         mAuth = FirebaseAuth.getInstance();
         databaseUser = FirebaseDatabase.getInstance().getReference(FirebaseDb.TABLE_USER);
@@ -106,7 +108,7 @@ WorkOutDetailFragment.OnFragmentInteractionListener, ProfileDetailsFragment.OnFr
     public void openWorkOutDetailsFragment() {
         drawerLayout.closeDrawers();
         WorkOutDetailFragment fragment = new WorkOutDetailFragment();
-        android.support.v4.app.FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.frame,fragment);
         fragmentTransaction.commit();
     }
@@ -114,7 +116,7 @@ WorkOutDetailFragment.OnFragmentInteractionListener, ProfileDetailsFragment.OnFr
     public void openProfileDetailFragment () {
         drawerLayout.closeDrawers();
         ProfileDetailsFragment fragment = new ProfileDetailsFragment();
-        android.support.v4.app.FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.frame,fragment);
         fragmentTransaction.commit();
     }
@@ -122,7 +124,7 @@ WorkOutDetailFragment.OnFragmentInteractionListener, ProfileDetailsFragment.OnFr
     public void openRecordWorkOutFragment () {
         drawerLayout.closeDrawers();
         RecordWorkFragment fragment = new RecordWorkFragment();
-        android.support.v4.app.FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.frame,fragment);
         fragmentTransaction.commit();
     }
@@ -130,7 +132,7 @@ WorkOutDetailFragment.OnFragmentInteractionListener, ProfileDetailsFragment.OnFr
     public void openEditProfileFragment () {
         drawerLayout.closeDrawers();
         EditProfileDetailsFragment fragment = new EditProfileDetailsFragment();
-        android.support.v4.app.FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.frame,fragment);
         fragmentTransaction.commit();
     }
@@ -138,7 +140,7 @@ WorkOutDetailFragment.OnFragmentInteractionListener, ProfileDetailsFragment.OnFr
     private void initialiseApp() {
         if(userData != null) {
         //Initializing NavigationView
-        navigationView = (NavigationView) findViewById(R.id.navigation_view);
+            navigationView = findViewById(R.id.navigation_view);
             navigationView.setItemIconTintList(null);
 
         //Setting Navigation View Item Selected Listener to handle the item click of the navigation menu
@@ -176,39 +178,39 @@ WorkOutDetailFragment.OnFragmentInteractionListener, ProfileDetailsFragment.OnFr
             }
         });
 
-        View header = navigationView.getHeaderView(0);
-        header.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openProfileDetailFragment();
-            }
-        });
-        ImageView profpic = (ImageView) header.findViewById(R.id.profile_image);
-        TextView username = (TextView) header.findViewById(R.id.username);
-        TextView useremail = (TextView) header.findViewById(R.id.email);
-        username.setText(userData.getName());
-        useremail.setText(userData.getEmail());
-        Picasso.with(RecordWorkOutActivity.this).load(Uri.parse(userData.getProf_pic())).transform(new CircleTransform()).into(profpic);
-      //  Picasso.with(RecordWorkOutActivity.this).load(Uri.parse(userData.getProf_pic())).fit().centerCrop().into(profpic);
+            View header = navigationView.getHeaderView(0);
+            header.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    openProfileDetailFragment();
+                }
+            });
+            ImageView profpic = header.findViewById(R.id.profile_image);
+            TextView username = header.findViewById(R.id.username);
+            TextView useremail = header.findViewById(R.id.email);
+            username.setText(userData.getName());
+            useremail.setText(userData.getEmail());
+            Picasso.with(RecordWorkOutActivity.this).load(Uri.parse(userData.getProf_pic())).transform(new CircleTransform()).into(profpic);
+            //  Picasso.with(RecordWorkOutActivity.this).load(Uri.parse(userData.getProf_pic())).fit().centerCrop().into(profpic);
 
 
-        // Initializing Drawer Layout and ActionBarToggle
-        drawerLayout = (DrawerLayout) findViewById(R.id.drawer);
-        ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this,drawerLayout,toolbar,R.string.openDrawer, R.string.closeDrawer){
+            // Initializing Drawer Layout and ActionBarToggle
+            drawerLayout = findViewById(R.id.drawer);
+            ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.openDrawer, R.string.closeDrawer) {
 
-            @Override
-            public void onDrawerClosed(View drawerView) {
-                // Code here will be triggered once the drawer closes as we dont want anything to happen so we leave this blank
-                super.onDrawerClosed(drawerView);
-            }
+                @Override
+                public void onDrawerClosed(View drawerView) {
+                    // Code here will be triggered once the drawer closes as we dont want anything to happen so we leave this blank
+                    super.onDrawerClosed(drawerView);
+                }
 
-            @Override
-            public void onDrawerOpened(View drawerView) {
-                // Code here will be triggered once the drawer open as we dont want anything to happen so we leave this blank
+                @Override
+                public void onDrawerOpened(View drawerView) {
+                    // Code here will be triggered once the drawer open as we dont want anything to happen so we leave this blank
 
-                super.onDrawerOpened(drawerView);
-            }
-        };
+                    super.onDrawerOpened(drawerView);
+                }
+            };
 
         //Setting the actionbarToggle to drawer layout
         drawerLayout.setDrawerListener(actionBarDrawerToggle);

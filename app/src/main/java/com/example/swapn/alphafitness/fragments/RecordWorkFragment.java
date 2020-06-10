@@ -8,12 +8,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.ServiceConnection;
-import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.location.Location;
-import android.location.LocationManager;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -21,13 +18,6 @@ import android.os.Handler;
 import android.os.IBinder;
 import android.os.RemoteException;
 import android.os.SystemClock;
-import android.preference.PreferenceManager;
-import android.support.annotation.Nullable;
-import android.support.design.widget.FloatingActionButton;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.Fragment;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -36,11 +26,14 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
+
 import com.example.swapn.alphafitness.IStepCounterInterface;
 import com.example.swapn.alphafitness.R;
 import com.example.swapn.alphafitness.RecordWorkOutActivity;
-import com.example.swapn.alphafitness.common.Constant;
-import com.example.swapn.alphafitness.common.FirebaseDb;
 import com.example.swapn.alphafitness.common.Util;
 import com.example.swapn.alphafitness.database.MyDbHelper;
 import com.example.swapn.alphafitness.database.Tables.UserTracking;
@@ -56,21 +49,13 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
-import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.Date;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -258,10 +243,10 @@ public class RecordWorkFragment extends Fragment implements OnMapReadyCallback,
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        db =  new MyDbHelper(Util.getContext());
-        fab = (Button) view.findViewById(R.id.fab);
-        distance = (TextView) view.findViewById(R.id.text_distance);
-        time = (TextView) view.findViewById(R.id.text_time);
+        db = new MyDbHelper(Util.getContext());
+        fab = view.findViewById(R.id.fab);
+        distance = view.findViewById(R.id.text_distance);
+        time = view.findViewById(R.id.text_time);
         mIntentFilter = new IntentFilter();
         mIntentFilter.addAction(mBroadcastStringAction);
         mIntentFilter.addAction(mBroadcastIntegerAction);
@@ -325,11 +310,7 @@ public class RecordWorkFragment extends Fragment implements OnMapReadyCallback,
 
 
     public boolean checkServiceRunning () {
-        if(Util.isRunning(Util.getContext())) {
-            return true;
-        } else {
-            return false;
-        }
+        return Util.isRunning(Util.getContext());
     }
 
     public void startTimer (long timebuff) {
@@ -701,7 +682,7 @@ public class RecordWorkFragment extends Fragment implements OnMapReadyCallback,
 
     @Override
     public void onRequestPermissionsResult(int requestCode,
-                                           String permissions[], int[] grantResults) {
+                                           String[] permissions, int[] grantResults) {
         switch (requestCode) {
             case MY_PERMISSIONS_REQUEST_LOCATION: {
                 // If request is cancelled, the result arrays are empty.

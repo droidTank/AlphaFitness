@@ -2,20 +2,18 @@ package com.example.swapn.alphafitness;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
-import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.swapn.alphafitness.common.Util;
 import com.example.swapn.alphafitness.models.UserModel;
@@ -30,11 +28,6 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
-
-import java.io.FileNotFoundException;
-import java.io.InputStream;
-
-import static android.R.attr.name;
 
 public class AccountSetupActivity extends AppCompatActivity {
 
@@ -65,10 +58,10 @@ public class AccountSetupActivity extends AppCompatActivity {
         mDatabaseUser = FirebaseDatabase.getInstance().getReference().child("users");
         mDatabase.addValueEventListener(postListener);
         mStorage = FirebaseStorage.getInstance().getReference();
-        input_height = (EditText) findViewById(R.id.input_height);
-        input_weight = (EditText) findViewById(R.id.input_weight);
-        prof_pic = (ImageView) findViewById(R.id.profile_picture);
-        submit = (Button) findViewById(R.id.btn_submit);
+        input_height = findViewById(R.id.input_height);
+        input_weight = findViewById(R.id.input_weight);
+        prof_pic = findViewById(R.id.profile_picture);
+        submit = findViewById(R.id.btn_submit);
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

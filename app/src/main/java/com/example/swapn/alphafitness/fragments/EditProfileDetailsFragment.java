@@ -1,19 +1,15 @@
 package com.example.swapn.alphafitness.fragments;
 
-import android.content.BroadcastReceiver;
 import android.content.Context;
-import android.content.Intent;
-import android.location.Location;
-import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.RadioButton;
 import android.widget.Toast;
+
+import androidx.fragment.app.Fragment;
 
 import com.example.swapn.alphafitness.R;
 import com.example.swapn.alphafitness.RecordWorkOutActivity;
@@ -92,13 +88,13 @@ public class EditProfileDetailsFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_edit_profile_details, container, false);
-        input_height = (EditText) view.findViewById(R.id.input_height);
-        input_weight = (EditText) view.findViewById(R.id.input_weight);
-        input_name = (EditText) view.findViewById(R.id.input_name);
-        update = (Button) view.findViewById(R.id.btn_update);
+        input_height = view.findViewById(R.id.input_height);
+        input_weight = view.findViewById(R.id.input_weight);
+        input_name = view.findViewById(R.id.input_name);
+        update = view.findViewById(R.id.btn_update);
         user = ((RecordWorkOutActivity) getActivity()).getUserData();
-        input_height.setText(user.getHeight().toString());
-        input_weight.setText(user.getWeight().toString());
+        input_height.setText(user.getHeight());
+        input_weight.setText(user.getWeight());
         input_name.setText(user.getName());
         u = new Util();
 

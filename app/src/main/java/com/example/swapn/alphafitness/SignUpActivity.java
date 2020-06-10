@@ -2,11 +2,7 @@ package com.example.swapn.alphafitness;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.net.Uri;
-import android.os.AsyncTask;
-import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.util.Patterns;
@@ -15,6 +11,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.swapn.alphafitness.common.FirebaseDb;
 import com.example.swapn.alphafitness.models.UserModel;
@@ -26,11 +25,8 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 public class SignUpActivity extends AppCompatActivity {
     private static final String TAG = "SignupActivity";
@@ -65,14 +61,14 @@ public class SignUpActivity extends AppCompatActivity {
         progressDialog = new ProgressDialog(SignUpActivity.this,
                 R.style.AppTheme_Dark_Dialog);
         mAuth = FirebaseAuth.getInstance();
-        _signupButton = (Button) findViewById(R.id.btn_signup);
-        _nameText = (EditText) findViewById(R.id.input_name);
-        _emailText = (EditText) findViewById(R.id.input_email);
-       // _mobileText = (EditText) findViewById(R.id.input_mobile);
-       // _addressText = (EditText) findViewById(R.id.input_address);
-        _passwordText = (EditText) findViewById(R.id.input_password);
-        _reEnterPasswordText = (EditText) findViewById(R.id.input_reEnterPassword);
-        _loginLink = (TextView) findViewById(R.id.link_login);
+        _signupButton = findViewById(R.id.btn_signup);
+        _nameText = findViewById(R.id.input_name);
+        _emailText = findViewById(R.id.input_email);
+        // _mobileText = (EditText) findViewById(R.id.input_mobile);
+        // _addressText = (EditText) findViewById(R.id.input_address);
+        _passwordText = findViewById(R.id.input_password);
+        _reEnterPasswordText = findViewById(R.id.input_reEnterPassword);
+        _loginLink = findViewById(R.id.link_login);
 
         _signupButton.setOnClickListener(new View.OnClickListener() {
             @Override
